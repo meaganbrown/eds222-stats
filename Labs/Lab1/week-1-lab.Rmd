@@ -24,9 +24,9 @@ In Thursday lab, we will often be working with exercises based on Introduction t
 ## Step 3: Install the following packages, if they are not already installed:^[Note: This will take a minute or two!]
 
 ```{r setup, include=TRUE, echo=TRUE, eval=FALSE}
-suppressMessages({
-  install.packages(
-    "tidymodels",
+# sandy's add on: check which package is not available on my machine.
+# define packages needed for this class in a vector
+pkg <- c("tidymodels",
     "gghighlight",
     "glue",
     "ggmosaic",
@@ -49,9 +49,12 @@ suppressMessages({
     "waffle",
     "ggrepel",
     "ggpubr",
-    "openintro"
-  )
-})
+    "openintro")
+# which packages are not in my list of already installed package?
+# these are the only ones i need to install
+pkg2install <- pkg[which(!(pkg %in% rownames(installed.packages())))]
+
+suppressMessages({install.packages(pkg2install)})
 ```
 
 ## Step 4: Load all the packages you need, plus the `_common.R` source file.^[Note: If you get a `namespace load` error for `tidyverse`, you want to remove the problem package, reinstall it, and then load `tidyverse` again.]
@@ -65,7 +68,7 @@ library(gt)
 library(openintro)
 
 # Where is the root directory where all your labs live? Change this filepath to work on your computer.
-rootdir <- ("~/Dropbox/Teaching/UCSB/EDS_222/EDS222_data/")
+rootdir <- ("~/meds/eds222-stats")
 ```
 
 Take a look at the help files for `source()` and `file.path()` functions. We will use these a lot in Labs and homework assignments.
@@ -80,7 +83,7 @@ Take a look at the help files for `source()` and `file.path()` functions. We wil
 Now, use `source` to run the script `_common.R`, which loads all the packages we'll need for our labs and does some extra stuff we won't use today. You'll `source()` this setup script before running all your labs.
 
 ```{r,include=TRUE}
-source(file.path(rootdir,"labs","_common.R"))
+source(file.path(rootdir,"labs","lab1", "_common.R"))
 ```
 
 For labs, we want to see all our code. Set your `knitr` options to `echo=TRUE` so you see all your code and output.
